@@ -13,3 +13,9 @@ jobs:
     steps:
       - name: Print Hello Cloud
         run: echo "hello cloud"
+
+      - name: Print current date
+        run: date
+
+      - name: User
+        run: whoami
