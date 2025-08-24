@@ -1,1 +1,15 @@
 
+name: Hello Cloud Workflow
+
+on:
+  push:
+    branches:
+      - main   # triggers only when you push to main branch
+
+jobs:
+  say-hello:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print Hello Cloud
+        run: echo "hello cloud"
