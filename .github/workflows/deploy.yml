@@ -1,9 +1,9 @@
-name: Deploy Static Site to EC2 with Nginx
+name: Deploy index.html to EC2
 
 on:
   push:
     branches:
-      - main   # deploy only when changes are pushed to main
+      - main
 
 jobs:
   deploy:
@@ -20,10 +20,9 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Copy site files to EC2
+      - name: Copy index.html to EC2
         run: |
-          scp -i ~/.ssh/id_rsa index.html ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/tmp/index.html
-          ssh -i ~/.ssh/id_rsa ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} "sudo mv /tmp/index.html /var/www/html/index.html"
+          scp -i ~/.ssh/id_rsa index.html ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/var/www/html/index.html
 
       - name: Restart Nginx
         run: |
